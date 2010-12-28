@@ -11,6 +11,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rack', '>=0'
 
+  s.add_development_dependency 'rspec', '>= 1.3.0'
+
   s.rubygems_version	= '1.3.7'
   s.files		= [
     'README.md',
