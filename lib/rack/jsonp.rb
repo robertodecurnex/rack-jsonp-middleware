@@ -13,7 +13,10 @@ module Rack
 
       return [400,{},[]] if requesting_jsonp && !callback
 
-      env['PATH_INFO'].sub!(/\.jsonp/i, '.json') if requesting_jsonp
+      if requesting_jsonp
+        env['PATH_INFO'].sub!(/\.jsonp/i, '.json')
+        env['REQUEST_URI'] = env['PATH_INFO']
+      end
       
       status, headers, body = @app.call(env)
 
