@@ -87,4 +87,33 @@ describe Rack::JSONP do
 
   end
 
+  describe 'when the original response is not json' do
+
+    before :each do
+      @response_status = 403
+      @response_headers = {
+       'Content-Type' => 'text/html',
+       'Content-Length' => '1'
+      }
+      @response_body = ['']
+
+      @request = Rack::MockRequest.env_for('/action.jsonp', :params => "callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+    end
+
+    it 'should not modify the response body' do
+      @jsonp_response_body.should == @response_body
+    end
+    
+    it 'should not odify the headers Content-Type' do
+      @jsonp_response_headers['Content-Type'].should == @response_headers['Content-Type']
+    end
+
+    it 'should not modify the headers Content-Lenght' do
+      @jsonp_response_headers['Content-Lenght'].should == @response_headers['Content-Lenght']
+    end
+
+  end
+
 end

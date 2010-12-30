@@ -20,7 +20,7 @@ module Rack
       
       status, headers, body = @app.call(env)
 
-      if requesting_jsonp
+      if requesting_jsonp && headers['Content-Type'].match(/application\/json/i)
         json = ""
         body.each { |s| json << s }
         body = ["#{callback}(#{json});"]

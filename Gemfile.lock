@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-jsonp-middleware (0.0.1)
+    rack-jsonp-middleware (0.0.4)
       rack
 
 GEM
