@@ -39,7 +39,7 @@ With the following Content-Type:
 Then http://domain.com/action.jsonp?callback=J50Npi.success will return the following:
     J50Npi.success({"key":"value"})
 With the following Content-Type:
-    aplication/javascript
+    application/javascript
 
 But http://domain.com/action.json?callback=J50Npi.sucess will still returns the following:
     {"key":"value"}
