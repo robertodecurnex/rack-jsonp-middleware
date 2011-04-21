@@ -25,7 +25,7 @@
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
     h2 { font-size: 1.5em; color: #fffda8; }
-    h3 { text-align: center; color: #fffda8; }
+    h3 {  color: #fffda8; }
     a { color: #fffda8; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     pre { background: #000; color: #fff; padding: 15px;}
@@ -75,14 +75,27 @@
     <p>Roberto Decurnex (nex.development@gmail.com)<br/></p>
  
     <h2>Install</h2>
-      <p>
-        If you are using <a href="http://gembundler.com">Bundler</a> you can easily add the following line to your Gemfile:
-        <pre>gem 'rack-jsonp-middleware'</pre>
-      </p>
-      <p> 
-        Or you can just install it as a ruby gem by running:
-        <pre>$ gem install rack-jsonp-middleware</pre>
-      </p>
+    <p>If you are using <a href="http://gembundler.com">Bundler</a> you can easily add the following line to your <tt>Gemfile</tt>:</p>
+    <pre>gem 'rack-jsonp-middleware'</pre>
+    <p>Or you can just install it as a ruby gem by running:</p>
+    <pre>$ gem install rack-jsonp-middleware</pre>
+      
+    <h2>Configuration</h2>
+    <h3>Rails 3</h3>
+    <p>In your <tt>config/application.rb</tt> file add:</p>
+    <pre>require 'rack/jsonp'</pre>
+    <p>And, within the config block:</p>
+    <pre>config.middleware.use Rack::JSONP</pre>
+    <p>Here is an exelent example of this - <a href="https://github.com/rwilcox/rack_jsonp_example/commit/809c2e3d4470b694ba1a98c09f2aa07115f433e5">Rails 3 Configuration Example</a></p>
+    <p>Thank you <a href="https://github.com/rwilcox">rwilcox!</a></p>
+
+    <h3>Rails 2</h3>
+    <p>Same as for Rails 3 but modifying the <tt>config/environment.rb</tt> file instead.</p>
+
+    <h3>Rack Apps</h3>
+    <p>In your <tt>config.ru</tt> file add the following lines:</p>
+    <pre>  require 'rack/jsonp'
+  use Rack::JSONP</pre>
       
     <h2>Download</h2>
     <p>
