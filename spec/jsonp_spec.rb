@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper.rb'
 
 describe Rack::JSONP do
@@ -42,6 +44,34 @@ describe Rack::JSONP do
     end
 
   end
+
+  describe 'when a valid jsonp request is made with multibyte characters' do
+
+    before :each do
+      @response_body = ['{"key":"√alue"}']
+      @request = Rack::MockRequest.env_for("/action.jsonp?callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+    end
+
+    it 'should not modify the response status code' do
+      @jsonp_response_status.should equal @response_status
+    end
+
+    it 'should update the response content length to the new value' do
+      @jsonp_response_headers['Content-Length'].should == '34'
+    end
+
+    it 'should set the response content type as application/javascript' do
+      @jsonp_response_headers['Content-Type'].should == 'application/javascript'
+    end
+
+    it 'should wrap the response body in the Javasript callback' do
+      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+    end
+
+  end
+
 
   describe 'when a jsonp request is made wihtout a callback parameter present' do
 
