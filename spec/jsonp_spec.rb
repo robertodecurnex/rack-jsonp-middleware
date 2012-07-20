@@ -2,10 +2,10 @@ require 'spec_helper.rb'
 
 describe Rack::JSONP do
 
-  before :each do 
+  before :each do
     @response_status = 200
     @response_headers = {
-     'Content-Type' => 'application/json', 
+     'Content-Type' => 'application/json',
      'Content-Length' => '15',
     }
     @response_body = ['{"key":"value"}']
@@ -13,12 +13,12 @@ describe Rack::JSONP do
     @app = lambda do |params|
       [@response_status, @response_headers, @response_body]
     end
-    
+
     @callback = 'J50Npi.success'
   end
-  
+
   describe 'when a valid jsonp request is made' do
-   
+
     before :each do
       @request = Rack::MockRequest.env_for("/action.jsonp?callback=#{@callback}")
       @jsonp_response = Rack::JSONP.new(@app).call(@request)
@@ -44,7 +44,7 @@ describe Rack::JSONP do
   end
 
   describe 'when a jsonp request is made wihtout a callback parameter present' do
-  
+
     before :each do
       @request = Rack::MockRequest.env_for('/action.jsonp')
       @jsonp_response = Rack::JSONP.new(@app).call(@request)
@@ -56,17 +56,17 @@ describe Rack::JSONP do
     end
 
     it 'should return an empty body' do
-      @jsonp_response_body.should == []      
-    end    
+      @jsonp_response_body.should == []
+    end
 
     it 'should return empty headers' do
-      @jsonp_response_headers.should == {}     
-    end 
+      @jsonp_response_headers.should == {}
+    end
 
   end
 
   describe 'when a non jsonp request is made' do
-    
+
     before :each do
       @request = Rack::MockRequest.env_for('/action.json')
       @jsonp_response = Rack::JSONP.new(@app).call(@request)
@@ -105,7 +105,7 @@ describe Rack::JSONP do
     it 'should not modify the response body' do
       @jsonp_response_body.should == @response_body
     end
-    
+
     it 'should not odify the headers Content-Type' do
       @jsonp_response_headers['Content-Type'].should == @response_headers['Content-Type']
     end

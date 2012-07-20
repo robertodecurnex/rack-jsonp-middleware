@@ -17,7 +17,7 @@ module Rack
         env['PATH_INFO'].sub!(/\.jsonp/i, '.json')
         env['REQUEST_URI'] = env['PATH_INFO']
       end
-      
+
       status, headers, body = @app.call(env)
 
       if requesting_jsonp && headers['Content-Type'] && headers['Content-Type'].match(/application\/json/i)
