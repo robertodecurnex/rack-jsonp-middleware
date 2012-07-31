@@ -17,14 +17,14 @@ module Rack
         env['PATH_INFO'].sub!(/\.jsonp/i, '.json')
         env['REQUEST_URI'] = env['PATH_INFO']
       end
-      
+
       status, headers, body = @app.call(env)
 
       if requesting_jsonp && headers['Content-Type'] && headers['Content-Type'].match(/application\/json/i)
         json = ""
         body.each { |s| json << s }
         body = ["#{callback}(#{json});"]
-        headers['Content-Length'] = body[0].length.to_s
+        headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
         headers['Content-Type'] = 'application/javascript'
       end
 
