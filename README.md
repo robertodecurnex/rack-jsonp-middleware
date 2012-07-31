@@ -1,4 +1,4 @@
-# rack-jsonp-middleware
+# rack-jsonp-middleware - ![Travis CI Status](http://travis-ci.org/robertodecurnex/rack-jsonp-middleware.png) - ![Gemnasium Dependencies Status](https://gemnasium.com/robertodecurnex/rack-jsonp-middleware.png)
 
 A Rack JSONP middleware
 
@@ -15,6 +15,11 @@ Btw, don't forget to give a try to [J50Nπ](https://github.com/robertodecurnex/J
 ## Authors
 
 Roberto Decurnex (nex.development@gmail.com)
+
+## Contributors
+
+* [rwilcox](https://github.com/rwilcox "rwilcox profile")
+* [amiel](https://github.com/amiel "amiel profile")
 
 ## Install
 
