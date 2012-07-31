@@ -9,9 +9,10 @@ Gem::Specification.new do |s|
 
   s.platform    = Gem::Platform::RUBY
 
-  s.add_dependency 'rack', '>=0'
+  s.add_dependency 'rack', '>= 0'
 
   s.add_development_dependency 'rspec', '>= 1.3.0'
+  s.add_development_dependency 'rake', '>= 0'
 
   s.rubygems_version	= '1.3.7'
   s.files		= [
