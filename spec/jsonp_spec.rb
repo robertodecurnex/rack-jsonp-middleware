@@ -48,6 +48,7 @@ describe Rack::JSONP do
   describe 'when a valid jsonp request is made with multibyte characters' do
 
     before :each do
+      @response_headers['Content-Type'] = 'application/json; charset=utf-8'
       @response_body = ['{"key":"√alue"}']
       @request = Rack::MockRequest.env_for("/action.jsonp?callback=#{@callback}")
       @jsonp_response = Rack::JSONP.new(@app).call(@request)
@@ -62,8 +63,8 @@ describe Rack::JSONP do
       @jsonp_response_headers['Content-Length'].should == '34'
     end
 
-    it 'should set the response content type as application/javascript' do
-      @jsonp_response_headers['Content-Type'].should == 'application/javascript'
+    it 'should set the response content type as application/javascript without munging the charset' do
+      @jsonp_response_headers['Content-Type'].should == 'application/javascript; charset=utf-8'
     end
 
     it 'should wrap the response body in the Javasript callback' do
