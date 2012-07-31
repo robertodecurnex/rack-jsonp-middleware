@@ -25,10 +25,16 @@ module Rack
         body.each { |s| json << s }
         body = ["#{callback}(#{json});"]
         headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
-        headers['Content-Type'] = 'application/javascript'
+        headers['Content-Type'] = force_mime_type(headers['Content-Type'], 'application/javascript')
       end
 
       [status, headers, body]
+    end
+
+    def force_mime_type(content_type, mime_type)
+      content_type_parts = (content_type || '').split(/;/)
+      content_type_parts[0] = mime_type
+      content_type_parts.join(';')
     end
 
   end
