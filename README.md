@@ -18,8 +18,8 @@ Roberto Decurnex (nex.development@gmail.com)
 
 ## Contributors
 
-* [rwilcox](https://github.com/rwilcox "rwilcox profile")
-* [amiel](https://github.com/amiel "amiel profile")
+* Ryan Wilcox ([rwilcox](https://github.com/rwilcox "rwilcox profile"))
+* Amiel Martin ([amiel](https://github.com/amiel "amiel profile"))
 
 ## Install
 
