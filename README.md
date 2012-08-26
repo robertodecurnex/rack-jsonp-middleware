@@ -1,14 +1,10 @@
 # rack-jsonp-middleware - ![Travis CI Status](http://travis-ci.org/robertodecurnex/rack-jsonp-middleware.png) - ![Gemnasium Dependencies Status](https://gemnasium.com/robertodecurnex/rack-jsonp-middleware.png)
 
-A Rack JSONP middleware
+Rack middleware that turns all .jsonp requests into a jsonp response. 
 
 ## Overview
 
-This is a customized implementation of a JSONP middleware. 
-
-The main difference with the rest of them is that this one will add JSONP support to any of your JSON calls but only when the extension name '.jsonp' is present.
-
-Since 'callback' is a really generic parameter name if someone wants to get a JSONP response they must request it explicitly.
+(does not support 'callback' since it is a really generic parameter name)
 
 Btw, don't forget to give a try to [J50Nπ](https://github.com/robertodecurnex/J50Npi) (a pure JS JSONP helper), they make a lovely couple together :P
 
@@ -79,3 +75,9 @@ But http://domain.com/action.json?callback=J50Npi.sucess will still returns the 
     {"key":"value"}
 With the following Content-Type:
     application/json
+
+# Security
+
+Supporting jsonp means that another websites can access your website on behalf of a user visiting their site,
+which might lead to security problems (e.g. they read http://yoursite.com/user.jsonp and get the users email etc),
+so think about if you want to turn it on globally.
