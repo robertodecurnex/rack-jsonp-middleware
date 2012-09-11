@@ -1,6 +1,8 @@
 module Rack
 
   class JSONP
+    # Do not allow arbitrary Javascript in the callback.
+    VALID_CALLBACK_PATTERN = /^[a-zA-Z0-9\._]+$/
 
     def initialize(app)
       @app = app
@@ -11,7 +13,7 @@ module Rack
       requesting_jsonp = Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i
       callback = request.params['callback']
 
-      return [400,{},[]] if requesting_jsonp && !callback
+      return [400,{},[]] if requesting_jsonp && (!callback || !callback.match(VALID_CALLBACK_PATTERN))
 
       if requesting_jsonp
         env['PATH_INFO'].sub!(/\.jsonp/i, '.json')
