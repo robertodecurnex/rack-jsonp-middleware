@@ -96,6 +96,28 @@ describe Rack::JSONP do
 
   end
 
+  describe 'when a jsonp request is made with an invalid callback' do
+
+    before :each do
+      @callback = "alert('window.cookies');cb"
+      @request = Rack::MockRequest.env_for("/action.jsonp?callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+    end
+
+    it 'should set the response status to 400' do
+      @jsonp_response_status.should equal 400
+    end
+
+    it 'should return an empty body' do
+      @jsonp_response_body.should == []
+    end
+
+    it 'should return empty headers' do
+      @jsonp_response_headers.should == {}
+    end
+  end
+
   describe 'when a non jsonp request is made' do
 
     before :each do
