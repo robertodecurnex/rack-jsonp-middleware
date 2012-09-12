@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name	= 'rack-jsonp-middleware'
-  s.version	= '0.0.6'
+  s.version	= '0.0.7'
   s.authors	= ['Roberto Decurnex']
   s.description	= 'A Rack JSONP middleware'
   s.summary	= 'rack-jsonp-middleware-0.0.5'
