@@ -1,4 +1,5 @@
-# rack-jsonp-middleware - ![Travis CI Status](http://travis-ci.org/robertodecurnex/rack-jsonp-middleware.png) - ![Gemnasium Dependencies Status](https://gemnasium.com/robertodecurnex/rack-jsonp-middleware.png)
+# rack-jsonp-middleware 
+![Travis CI Status](http://travis-ci.org/robertodecurnex/rack-jsonp-middleware.png) - ![Gemnasium Dependencies Status](https://gemnasium.com/robertodecurnex/rack-jsonp-middleware.png) - [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/robertodecurnex/rack-jsonp-middleware)
 
 Rack middleware that turns all .jsonp requests into a jsonp response. 
 
