@@ -1,3 +1,6 @@
+
+require 'pathname'
+
 module Rack
 
   class JSONP
