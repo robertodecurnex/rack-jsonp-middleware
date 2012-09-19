@@ -28,7 +28,7 @@ describe Rack::JSONP do
     end
 
     it 'should not modify the response status code' do
-      @jsonp_response_status.should equal @response_status
+      @jsonp_response_status.should == @response_status
     end
 
     it 'should update the response content length to the new value' do
@@ -56,7 +56,7 @@ describe Rack::JSONP do
     end
 
     it 'should not modify the response status code' do
-      @jsonp_response_status.should equal @response_status
+      @jsonp_response_status.should == @response_status
     end
 
     it 'should update the response content length to the new value' do
@@ -106,7 +106,7 @@ describe Rack::JSONP do
     end
 
     it 'should set the response status to 400' do
-      @jsonp_response_status.should equal 400
+      @jsonp_response_status.should == 400
     end
 
     it 'should return an empty body' do
@@ -127,15 +127,15 @@ describe Rack::JSONP do
     end
 
     it 'should not modify the response status' do
-      @jsonp_response_status.should equal @response_status
+      @jsonp_response_status.should == @response_status
     end
 
     it 'should not modify the response headers' do
-      @jsonp_response_headers.should equal @response_headers
+      @jsonp_response_headers.should == @response_headers
     end
 
     it 'should not modify the response body' do
-      @jsonp_response_body.should equal @response_body
+      @jsonp_response_body.should == @response_body
     end
 
   end
