@@ -83,7 +83,7 @@ describe Rack::JSONP do
     end
 
     it 'should set the response status to 400' do
-      @jsonp_response_status.should equal 400
+      @jsonp_response_status.should == 400
     end
 
     it 'should return an empty body' do
