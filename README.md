@@ -64,7 +64,7 @@ You can also clone the project with Git by running:
 
 ## Examples
 
-Given that http://domain.com/action.json returns the following:
+Given that http://domain.com/action.json returns:
 
     {"key":"value"}
 
@@ -72,7 +72,7 @@ With the following Content-Type:
 
     application/json
 
-Then http://domain.com/action.jsonp?callback=J50Npi.success will return the following:
+Then http://domain.com/action.jsonp?callback=J50Npi.success will return:
 
     J50Npi.success({"key":"value"})
 
@@ -80,7 +80,7 @@ With the following Content-Type:
 
     application/javascript
 
-But http://domain.com/action.json?callback=J50Npi.sucess will still returns the following:
+But http://domain.com/action.json?callback=J50Npi.sucess will still return:
 
     {"key":"value"}
 
