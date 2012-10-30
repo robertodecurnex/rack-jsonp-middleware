@@ -17,7 +17,7 @@ module Rack
       return [400,{},[]] if requesting_jsonp && !self.valid_callback?(callback)
 
       if requesting_jsonp
-        env['PATH_INFO'].sub!(/\.jsonp/i, '.json')
+        env['PATH_INFO'] = env['PATH_INFO'].sub(/\.jsonp/i, '.json')
         env['REQUEST_URI'] = env['PATH_INFO']
       end
 
@@ -28,7 +28,7 @@ module Rack
         body.each { |s| json << s }
         body = ["#{callback}(#{json});"]
         headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
-        headers['Content-Type'].sub!(/^[^;]+(;?)/, "#{MIME_TYPE}\\1")
+        headers['Content-Type'] = headers['Content-Type'].sub(/^[^;]+(;?)/, "#{MIME_TYPE}\\1")
       end
 
       [status, headers, body]
