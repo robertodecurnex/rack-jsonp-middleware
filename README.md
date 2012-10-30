@@ -19,6 +19,7 @@ Roberto Decurnex (nex.development@gmail.com)
 * Amiel Martin ([amiel](https://github.com/amiel "amiel profile"))
 * Michael Grosser ([grosser](https://github.com/grosser "grosser profile"))
 * Matt Sanford ([mzsanford](https://github.com/mzsanford "mzsanford profile"))
+* joelmats ([joelmats](https://github.com/joelmats "joelmats profile"))
 
 ## Install
 
