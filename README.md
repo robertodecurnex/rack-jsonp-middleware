@@ -11,7 +11,7 @@ Btw, don't forget to give a try to [J50Nπ](https://github.com/robertodecurnex/J
 
 ## Authors
 
-Roberto Decurnex (nex.development@gmail.com)
+Roberto Decurnex (decurnex.roberto@gmail.com)
 
 ## Contributors
 
