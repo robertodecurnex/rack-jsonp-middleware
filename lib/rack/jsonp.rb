@@ -11,7 +11,7 @@ module Rack
 
     def call(env)
       request = Rack::Request.new(env)
-      requesting_jsonp = Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i
+      requesting_jsonp = ( Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i || request.params['format'] == 'jsonp')
       callback = request.params['callback']
 
       return [400,{},[]] if requesting_jsonp && !self.valid_callback?(callback)
