@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rack', '>= 0'
 
+  s.add_development_dependency 'coveralls'
   s.add_development_dependency 'rspec', '>= 1.3.0'
   s.add_development_dependency 'rake', '>= 0'
 
