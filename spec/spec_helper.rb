@@ -1,4 +1,4 @@
-# Creates and push coverage reports
+# Create and push coverage reports
 # This MUST be done before any other requrie in order to get the reports.
 require 'coveralls'
 Coveralls.wear!
