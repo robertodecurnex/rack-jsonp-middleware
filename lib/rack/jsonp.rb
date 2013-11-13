@@ -5,8 +5,9 @@ module Rack
 
   class JSONP
 
-    def initialize(app)
+    def initialize(app, path_prefix = nil)
       @app = app
+      @path_prefix = path_prefix
     end
 
     def call(env)
@@ -14,9 +15,10 @@ module Rack
       requesting_jsonp = Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i
       callback = request.params['callback']
 
-      return [400,{},[]] if requesting_jsonp && !self.valid_callback?(callback)
-
       if requesting_jsonp
+        return [400,{},[]] if !self.valid_callback?(callback)
+        return [400,{},[]] if check_prefix? and !matches_prefix?(request.env['PATH_INFO'])
+
         env['PATH_INFO'] = env['PATH_INFO'].sub(/\.jsonp/i, '.json')
         env['REQUEST_URI'] = env['PATH_INFO']
       end
@@ -58,6 +60,14 @@ module Rack
     # @return [TrueClass|FalseClass]
     def json_response?(content_type)
       !content_type.nil? && !content_type.match(/^application\/json/i).nil?
+    end
+    
+    def check_prefix?
+      !!@path_prefix
+    end
+    
+    def matches_prefix?(path)
+      path.start_with?(@path_prefix)
     end
 
   end
