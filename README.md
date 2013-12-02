@@ -43,7 +43,7 @@ And, within the config block:
     
     config.middleware.use Rack::JSONP
 
-Here is an exelent example of this - [Rails 3 Configuration Example](https://github.com/rwilcox/rack_jsonp_example/commit/809c2e3d4470b694ba1a98c09f2aa07115f433e5 "Rails 3 Configuration Example")
+Here is an excellent example of this - [Rails 3 Configuration Example](https://github.com/rwilcox/rack_jsonp_example/commit/809c2e3d4470b694ba1a98c09f2aa07115f433e5 "Rails 3 Configuration Example")
 
 Thank you [rwilcox](https://github.com/rwilcox "rwilcox profile")! 
 
