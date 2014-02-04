@@ -89,6 +89,15 @@ With the following Content-Type:
 
     application/json
 
+## Restricting to a path prefix
+
+You can restrict the delivery of jsonp to a path prefix. For example, if
+
+  use Rack::JSONP, "/api/v1/"
+
+is used, only requests to paths that start with /api/v1/ will answered with jsonp.
+JSONP requests to other paths will be answered with error code 400.
+
 # Security
 
 Supporting jsonp means that another websites can access your website on behalf of a user visiting their site,
