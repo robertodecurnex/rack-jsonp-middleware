@@ -169,4 +169,20 @@ describe Rack::JSONP do
 
   end
 
+  describe 'when configured to be triggered by the presence of `callback` alone' do
+    before :each do
+      @response_headers = {
+      'Content-Type' => 'text/javascript',
+      'Content-Length' => '15',
+      }
+      @request = Rack::MockRequest.env_for("/action.js?callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app, trigger: :callback).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+    end
+
+    it 'should wrap the response body in the Javasript callback' do
+      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+    end
+  end
+
 end

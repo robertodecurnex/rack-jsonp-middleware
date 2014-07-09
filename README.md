@@ -20,6 +20,7 @@ Roberto Decurnex (decurnex.roberto@gmail.com)
 * Michael Grosser ([grosser](https://github.com/grosser "grosser profile"))
 * Matt Sanford ([mzsanford](https://github.com/mzsanford "mzsanford profile"))
 * joelmats ([joelmats](https://github.com/joelmats "joelmats profile"))
+* Mark Bennett ([markabe](https://github.com/markabe "markabe profile"))
 
 ## Install
 
@@ -57,6 +58,12 @@ In your `config.ru` file add the following lines:
     
     require 'rack/jsonp'
     use Rack::JSONP
+
+### Options
+
+By default only routes with an extension of `.jsonp` will checked for the presence of a `callback` parameter before adding the padding. If you prefer to use a different extension and want to enable the padding based only on the presence of the `callback` parameter just pass an extra parameter like this:
+
+    config.middleware.use Rack::JSONP, { trigger: :callback }
 
 ## Download
 
