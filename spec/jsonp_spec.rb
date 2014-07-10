@@ -169,4 +169,33 @@ describe Rack::JSONP do
 
   end
 
+  describe 'when configured to be triggered by the presence of `callback` alone' do
+    before :each do
+      @response_headers = {
+      'Content-Type' => 'text/javascript',
+      'Content-Length' => '15',
+      }
+      @request = Rack::MockRequest.env_for("/action.js?callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app, trigger: :callback).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+    end
+
+    it 'should wrap the response body in the JavaScript callback' do
+      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+    end
+  end
+
+  describe 'when configured to add extra security to output' do
+    before :each do
+      @request = Rack::MockRequest.env_for("/action.jsonp?callback=#{@callback}")
+      @jsonp_response = Rack::JSONP.new(@app, extra_security: true).call(@request)
+      @jsonp_response_status, @jsonp_response_headers, @jsonp_response_body = @jsonp_response
+      @callback = '/**/J50Npi.success'
+    end
+
+    # Reference: http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
+    it 'it prepends /**/ to the javascript output to thwart attacks' do
+      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+    end
+  end
 end

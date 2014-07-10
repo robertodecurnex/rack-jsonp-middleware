@@ -5,14 +5,16 @@ module Rack
 
   class JSONP
 
-    def initialize(app)
+    def initialize(app, options={})
       @app = app
+      @trigger = options.fetch(:trigger, :extension)
+      @extra_security = options[:extra_security] == true
     end
 
     def call(env)
       request = Rack::Request.new(env)
-      requesting_jsonp = Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i
       callback = request.params['callback']
+      requesting_jsonp = trigger_via_extesion?(request) || trigger_via_callback?(callback)
 
       return [400,{},[]] if requesting_jsonp && !self.valid_callback?(callback)
 
@@ -26,7 +28,8 @@ module Rack
       if requesting_jsonp && self.json_response?(headers['Content-Type'])
         json = ""
         body.each { |s| json << s }
-        body = ["#{callback}(#{json});"]
+        security_str = @extra_security ? '/**/' : ''
+        body = ["#{security_str}#{callback}(#{json});"]
         headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
         headers['Content-Type'] = headers['Content-Type'].sub(/^[^;]+(;?)/, "#{MIME_TYPE}\\1")
       end
@@ -52,14 +55,21 @@ module Rack
       !callback.nil? && !callback.match(VALID_CALLBACK_PATTERN).nil?
     end
 
-    # Check if the response Content Type is JSON.
+    # Check if the response Content Type is JSON or JavaScript.
     #
     # @param [Hash] content_type the response Content Type
     # @return [TrueClass|FalseClass]
     def json_response?(content_type)
-      !content_type.nil? && !content_type.match(/^application\/json/i).nil?
+      !content_type.nil? && !content_type.match(/^application\/json|text\/javascript/i).nil?
     end
 
+    def trigger_via_extesion?(request)
+      Pathname(request.env['PATH_INFO']).extname =~ /^\.jsonp$/i
+    end
+
+    def trigger_via_callback?(callback)
+      @trigger.to_s == 'callback' && !callback.nil?
+    end
   end
 
 end
