@@ -61,9 +61,13 @@ In your `config.ru` file add the following lines:
 
 ### Options
 
-By default only routes with an extension of `.jsonp` will checked for the presence of a `callback` parameter before adding the padding. If you prefer to use a different extension and want to enable the padding based only on the presence of the `callback` parameter just pass an extra parameter like this:
+**:trigger** - By default only routes with an extension of `.jsonp` will checked for the presence of a `callback` parameter before adding the padding. If you prefer to use a different extension and want to enable the padding based only on the presence of the `callback` parameter just pass an extra parameter like this:
 
     config.middleware.use Rack::JSONP, { trigger: :callback }
+
+**:extra_security** - A [vulerability was discovered](http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/) that can abuse JSONP endpoints. Enabling this option will prepend `/**/` to the JavaScript response which will interrupt any attempt at transmitting malicious data using the method described in the link.
+
+    config.middleware.use Rack::JSONP, { extra_security: true }
 
 ## Download
 

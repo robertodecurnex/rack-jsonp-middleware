@@ -8,6 +8,7 @@ module Rack
     def initialize(app, options={})
       @app = app
       @trigger = options.fetch(:trigger, :extension)
+      @extra_security = options[:extra_security] == true
     end
 
     def call(env)
@@ -27,7 +28,8 @@ module Rack
       if requesting_jsonp && self.json_response?(headers['Content-Type'])
         json = ""
         body.each { |s| json << s }
-        body = ["#{callback}(#{json});"]
+        security_str = @extra_security ? '/**/' : ''
+        body = ["#{security_str}#{callback}(#{json});"]
         headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
         headers['Content-Type'] = headers['Content-Type'].sub(/^[^;]+(;?)/, "#{MIME_TYPE}\\1")
       end
