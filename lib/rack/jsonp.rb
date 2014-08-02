@@ -26,7 +26,7 @@ module Rack
       if requesting_jsonp && self.json_response?(headers['Content-Type'])
         json = ""
         body.each { |s| json << s }
-        body = ["#{callback}(#{json});"]
+        body = ["/**/#{callback}(#{json});"]
         headers['Content-Length'] = Rack::Utils.bytesize(body[0]).to_s
         headers['Content-Type'] = headers['Content-Type'].sub(/^[^;]+(;?)/, "#{MIME_TYPE}\\1")
       end
