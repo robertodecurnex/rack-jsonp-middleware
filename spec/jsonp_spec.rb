@@ -40,7 +40,7 @@ describe Rack::JSONP do
     end
 
     it 'should wrap the response body in the Javasript callback' do
-      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+      @jsonp_response_body.should == ["/**/#{@callback}(#{@response_body.first});"]
     end
 
   end
@@ -68,7 +68,7 @@ describe Rack::JSONP do
     end
 
     it 'should wrap the response body in the Javasript callback' do
-      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+      @jsonp_response_body.should == ["/**/#{@callback}(#{@response_body.first});"]
     end
 
   end
