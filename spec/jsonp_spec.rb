@@ -32,7 +32,7 @@ describe Rack::JSONP do
     end
 
     it 'should update the response content length to the new value' do
-      @jsonp_response_headers['Content-Length'].should == '32'
+      @jsonp_response_headers['Content-Length'].should == '36'
     end
 
     it 'should set the response content type as application/javascript' do
@@ -40,7 +40,7 @@ describe Rack::JSONP do
     end
 
     it 'should wrap the response body in the Javasript callback' do
-      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+      @jsonp_response_body.should == ["/**/#{@callback}(#{@response_body.first});"]
     end
 
   end
@@ -60,7 +60,7 @@ describe Rack::JSONP do
     end
 
     it 'should update the response content length to the new value' do
-      @jsonp_response_headers['Content-Length'].should == '34'
+      @jsonp_response_headers['Content-Length'].should == '38'
     end
 
     it 'should set the response content type as application/javascript without munging the charset' do
@@ -68,7 +68,7 @@ describe Rack::JSONP do
     end
 
     it 'should wrap the response body in the Javasript callback' do
-      @jsonp_response_body.should == ["#{@callback}(#{@response_body.first});"]
+      @jsonp_response_body.should == ["/**/#{@callback}(#{@response_body.first});"]
     end
 
   end
